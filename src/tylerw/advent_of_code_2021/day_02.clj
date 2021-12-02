@@ -25,4 +25,6 @@
         {:keys [horiz depth]} (reduce f init input)]
     (* horiz depth)))
 
-(println (t1 input) (t2 input))
+(defn -main
+  [& _]
+  (println ((juxt t1 t2) input)))

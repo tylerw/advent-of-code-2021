@@ -15,4 +15,6 @@
   (let [xf (comp (x/window 3 + -) (drop 2))]
     (t1 (sequence xf input))))
 
-(println (t1 input) (t2 input))
+(defn -main
+  [& _]
+  (println ((juxt t1 t2) input)))
