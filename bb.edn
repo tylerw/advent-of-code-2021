@@ -1,0 +1,29 @@
+{
+ :paths ["src"]
+ :deps {}
+
+ :tasks
+ {
+  :requires ([clojure.edn :as edn]
+             [babashka.fs :as fs])
+  :init (do
+          (defn run-day
+            [day-n]
+            (let [clj-options (format "-M -m tylerw.advent-of-code-2021.day-%02d" day-n)]
+              (clojure clj-options))))
+
+  solve {:doc "Run the code to solve the a day's puzzle"
+         :task (-> *command-line-args* first edn/read-string run-day)}
+
+  clean {:doc "Clean out temporary files"
+         :task (run! fs/delete-tree
+                     [".nrepl-port" ".cpcache" ".lsp" ".clj-kondo"])}
+
+  generate-pom {:doc "Generate POM file"
+                :task (clojure "-X:deps mvn-pom")}
+
+  generate-jar {:doc "Generate JAR file"
+                :depends [generate-pom]
+                :task (clojure "-X:jar")}
+  }
+}
