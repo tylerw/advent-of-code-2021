@@ -15,3 +15,5 @@
       (bb/run-tests)
       (bb/clean)
       (bb/uber)))
+
+(def clean bb/clean)

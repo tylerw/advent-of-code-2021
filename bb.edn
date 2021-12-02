@@ -16,8 +16,9 @@
          :task (-> *command-line-args* first edn/read-string run-day)}
 
   clean {:doc "Clean out temporary files"
-         :task (run! fs/delete-tree
-                     [".nrepl-port" ".cpcache" ".lsp" ".clj-kondo"])}
+         :task (do (run! fs/delete-tree
+                     [".nrepl-port" ".cpcache" ".lsp" ".clj-kondo"])
+                   (clojure "-T:build" "clean"))}
 
   generate-pom {:doc "Generate POM file"
                 :task (clojure "-X:deps mvn-pom")}
