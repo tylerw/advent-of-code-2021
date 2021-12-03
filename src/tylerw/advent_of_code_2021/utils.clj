@@ -23,13 +23,14 @@
 (defn parse-int
   "Parse string of decimal digits with optional leading -/+ and return an
   Integer value, or nil if parse fails"
-  ^Integer [^String s]
+  (^Integer [^String s] (parse-int s 10))
+  (^Integer [^String s ^Integer radix]
   (if (string? s)
     (try
-      (Integer/valueOf s)
+      (Integer/valueOf s radix)
       (catch NumberFormatException _ nil))
     (throw (IllegalArgumentException.
              (str "Expected string, got "
                   (if (nil? val)
                     "nil"
-                    (-> val class .getName)))))))
+                    (-> val class .getName))))))))
