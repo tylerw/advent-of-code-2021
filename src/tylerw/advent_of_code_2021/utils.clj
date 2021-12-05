@@ -1,5 +1,6 @@
 (ns tylerw.advent-of-code-2021.utils
   (:require [clojure.java.io :as io]
+            [clojure.edn :as edn]
             [net.cgrand.xforms.io :as xio]))
 
 ;;; input
@@ -16,6 +17,9 @@
   [n]
   (-> n day-input-resource xio/lines-in))
 
+(defn read-string-as-vec
+  [s]
+  (-> (str "[" s "]") edn/read-string))
 
 ;;; numbers
 ;; parse-int
