@@ -1,6 +1,7 @@
 (ns tylerw.advent-of-code-2021.utils
   (:require [clojure.java.io :as io]
             [clojure.edn :as edn]
+            [clojure.core.matrix :as m]
             [net.cgrand.xforms.io :as xio]))
 
 ;;; input
@@ -17,7 +18,9 @@
   [n]
   (-> n day-input-resource xio/lines-in))
 
+
 (defn read-string-as-vec
+  "Wrap a string s in brackets and read it."
   [s]
   (-> (str "[" s "]") edn/read-string))
 
